@@ -219,7 +219,7 @@ end
 def extract_artifact!
   recipe_eval do
     case ::File.extname(cached_tar_path)
-    when /(tar|tgz|tar\.gz|tbz2|tbz|tar\.xz)$/
+    when /(tar|tgz|tar\.gz|gz|tbz2|tbz|tar\.xz)$/
 
       taropts = [ '-x' ]
       taropts.push('-z') if cached_tar_path.match(/(tgz|tar\.gz)$/)
@@ -256,7 +256,7 @@ def extract_artifact!
         end
       end
     else
-      Chef::Application.fatal! "Cannot extract artifact because of its extension. Supported types are [tar.gz tgz tar tar.bz2 tbz zip war jar]."
+      Chef::Application.fatal! "Cannot extract artifact (#{cached_tar_path}, #{::File.extname(cached_tar_path)}) because of its extension. Supported types are [tar.gz tgz tar tar.bz2 tbz zip war jar]."
     end
 
     # Working with artifacts that are packaged under an extra top level directory
