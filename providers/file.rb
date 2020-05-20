@@ -48,7 +48,7 @@ def load_current_resource
   @file_location = new_resource.location
   @file_path = new_resource.path
 
-  @current_resource = Chef::Resource::ArtifactFile.new(@new_resource.name)
+  @current_resource = Chef::Resource.resource_for_node(:artifact_file, node)
   @current_resource
 end
 
